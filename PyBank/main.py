@@ -11,13 +11,12 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 total_months = 0 
 total_profit = 0
 total_change = 0
-maximum_profit = 0
-decrease_profit = 0
+maximum_profit = {"month": "", "amount": 0}
+decrease_profit = {"month": "", "amount": 0}
+month_change = []
+month = []
 is_first_row = True
-# print(os.getcwd())
-# print(__file__)
 
-# print(os.getcwd())
 
 with open(CSV_PATH) as csv_file:
     csv_reader = csv.reader(csv_file)
@@ -32,17 +31,31 @@ with open(CSV_PATH) as csv_file:
         else:
             curr_change = curr_profit - prev_profit
             total_change += curr_change
-    
-        # Prepare for next month
-        prev_profit = curr_profit
+        
+        #Prepare for next month
+        prev_profit = curr_profit 
 
-average_change = total_change / (total_months - 1)
-       
+        if total_months > 1:
+            month_list = row[MONTH_IDX]
+            month_change.append(curr_change)
+            month.append(month_list)
+            #Find Greatest increase and decrease
+            if curr_change > maximum_profit["amount"]:
+                maximum_profit["month"] = month_list
+                maximum_profit["amount"] = curr_change
+            if curr_change < decrease_profit["amount"]:
+                decrease_profit["month"] = month_list
+                decrease_profit["amount"] = curr_change
+
+    average_change = total_change / (total_months - 1) 
+    rounded_average_change = round(average_change, 2)
+
         
 print("Financial Analysis")
 print("------------------------")
 print("Total Months:", total_months)
 print("Total:", "$",total_profit)
-print("Average Change:", f"${average_change}")
-print("Greatest Increase in Profits: ", maximum_profit)
-print("Greatest Decrease in Profits:", decrease_profit)
+print(f"Average Change:, ${rounded_average_change}")
+print(f"Greatest Increase in Profits:,  {maximum_profit['month']} (${maximum_profit['amount']})")
+print(f"Greatest Decrease in Profits:, {decrease_profit['month']} (${decrease_profit['amount']})")
+

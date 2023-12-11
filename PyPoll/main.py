@@ -4,14 +4,23 @@ import csv
 csvpath = os.path.join("python-challenge","PyPoll", "Resources", "election_data.csv")
 
 total_votes = 0
+candidate_names = []
+candidate_votes = {}
 
 with open(csvpath, 'r') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
+    header = next(csv_reader)
+    
+    for row in csv_reader:
+        total_votes += 1
+        candidate = row[2]
+        candidate_names.append(candidate) 
+        candidate_names.count(candidate)
    
-    next(csv_reader, None)
+
+
     print("Elections Results")
     print("-------------------")
-
-    for row in csv_reader:
-        total_votes = total_votes + 1
-        print("Total Votes:", total_votes)
+    print("Total Votes:", total_votes)
+    print("-------------------")
+print(candidate_names)
