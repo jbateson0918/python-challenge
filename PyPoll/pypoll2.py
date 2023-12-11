@@ -1,11 +1,12 @@
 import os
 import csv
 
-csvpath = os.path.join("python-challenge","PyPoll", "Resources", "election_data.csv")
+csvpath = os.path.join("Resources", "election_data.csv")
 
 total_votes = 0
 candidate_names = []
 candidate_votes = {}
+
 
 with open(csvpath, 'r') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
@@ -24,3 +25,4 @@ with open(csvpath, 'r') as csv_file:
     print("Total Votes:", total_votes)
     print("-------------------")
 print(candidate_names)
+
