@@ -11,31 +11,33 @@ candidate_votes = {}
 with open(csvpath, 'r') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     header = next(csv_reader)
-    
+
     for row in csv_reader:
         total_votes += 1
         candidate = row[2]
-        candidate_names.append(candidate) 
-        
+         
+
         if candidate in candidate_votes:
             candidate_votes[candidate] += 1
         else:
-            candidate_votes[candidate] = 1
-   
+            candidate_names.append(candidate) 
+            candidate_votes[candidate] = 1 
+        
     percentage = {candidate: (votes / total_votes) * 100\
                    for candidate, votes in candidate_votes.items()}
 
-    winner = max(candidate_votes)
+    winning_candidate = max(candidate_votes)
 
-    print("Elections Results")
-    print("-------------------")
-    print("Total Votes:", total_votes)
-    print("-------------------")
+print("Elections Results")
+print("-------------------")
+print("Total Votes:", total_votes)
+print("-------------------")
 
-for candidate in candidate_names:
+for candidate in candidate_votes:
     print(f"{candidate}: {percentage[candidate]:.2f}%\
-           ({candidate_votes[candidate]})")
+        ({candidate_votes[candidate]})")
 
-    print("-------------------------")
-    print(f"Winner: {winner}")
-    print("-------------------------")
+print("-------------------------")
+print("Winner:", {winning_candidate})
+print("-------------------------")
+
