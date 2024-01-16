@@ -39,5 +39,4 @@ for candidate in candidate_votes:
 
 print("-------------------------")
 print("Winner:", {winning_candidate})
-print("-------------------------")
-
+print("--------------------------")
