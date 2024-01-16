@@ -40,3 +40,14 @@ for candidate in candidate_votes:
 print("-------------------------")
 print("Winner:", {winning_candidate})
 print("--------------------------")
+
+output_path = os.path.join("analysis", "results.txt")
+lines = ["Financial Analysis", 
+         "----------------------------", 
+         "Total Months: " + total_months, "Total: " + "$" + total_profit, 
+         "Average Change: " + "$" + {rounded_average_change}, 
+         "Greatest Increase in Profits: " + ({maximum_profit['month']} + {maximum_profit['amount']}), 
+         "Greatest Decrease in Profts: "  + ({decrease_profit['month']}+  {decrease_profit['amount']})
+         ]
+with open(output_path, 'w') as f:
+    f.writelines('\n'.join(lines))
