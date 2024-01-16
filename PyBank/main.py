@@ -59,3 +59,15 @@ print(f"Average Change:, ${rounded_average_change}")
 print(f"Greatest Increase in Profits:,  {maximum_profit['month']} (${maximum_profit['amount']})")
 print(f"Greatest Decrease in Profits:, {decrease_profit['month']} (${decrease_profit['amount']})")
 
+#output
+#https://www.pythontutorial.net/python-basics/python-write-text-file/ as resource
+output_path = os.path.join("analysis", "results.txt")
+lines = ["Financial Analysis", 
+         "----------------------------", 
+         "Total Months: " + total_months, "Total: " + "$" + total_profit, 
+         "Average Change: " + "$" + {rounded_average_change}, 
+         "Greatest Increase in Profits: " + ({maximum_profit['month']} + {maximum_profit['amount']}), 
+         "Greatest Decrease in Profts: "  + ({decrease_profit['month']}+  {decrease_profit['amount']})
+         ]
+with open(output_path, 'w') as f:
+    f.writelines('\n'.join(lines))
